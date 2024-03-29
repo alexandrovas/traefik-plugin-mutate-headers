@@ -4,14 +4,8 @@ type: middleware
 import: github.com/trolleksii/traefik-plugin-mutate-headers
 
 testData:
-  rewrites:
+  mutations:
     - header: Host
       newName: X-Implied-Host
-      regex: "^(.+)\.testing.com$"
+      regex: "^(.+)\\.testing.com$"
       replacement: "$1"
-    - header: Authorization
-      regex: "Bearer (.+)"
-      replacement: "$1"
-    - header: X-Test-Header
-      newName: Test-Header
-      deleteSource: true

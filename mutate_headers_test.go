@@ -71,7 +71,7 @@ func TestHeaderMutator(t *testing.T) {
 				{
 					Header:      "Host",
 					NewName:     "X-Host",
-					Regex:       "^(.+).test.com$",
+					Regex:       "^(.+)\\.test.com$",
 					Replacement: "$1",
 				},
 			},
@@ -90,7 +90,7 @@ func TestHeaderMutator(t *testing.T) {
 					Header:       "Host",
 					NewName:      "X-Host",
 					DeleteSource: true,
-					Regex:        "^(.+).test.com$",
+					Regex:        "^(.+)\\.test.com$",
 					Replacement:  "$1",
 				},
 			},
