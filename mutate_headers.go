@@ -96,7 +96,12 @@ func (h *HeaderMutator) ServeHTTP(rw http.ResponseWriter, req *http.Request) {
 
 		for _, v := range headerValues {
 			if m.mutate {
-				req.Header.Add(m.newName, m.regex.ReplaceAllString(v, m.replacement))
+				mv := m.regex.ReplaceAllString(v, m.replacement)
+				if mv != "" {
+					req.Header.Add(m.newName, mv)
+				} else {
+					req.Header.Add(m.newName, v)
+				}
 			} else {
 				req.Header.Add(m.newName, v)
 			}

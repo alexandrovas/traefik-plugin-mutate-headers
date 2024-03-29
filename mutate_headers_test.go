@@ -71,7 +71,7 @@ func TestHeaderMutator(t *testing.T) {
 				{
 					Header:      "Host",
 					NewName:     "X-Host",
-					Regex:       "^(.+)\\.test.com$",
+					Regex:       "^(.+)\\.test\\.com$",
 					Replacement: "$1",
 				},
 			},
@@ -90,7 +90,7 @@ func TestHeaderMutator(t *testing.T) {
 					Header:       "Host",
 					NewName:      "X-Host",
 					DeleteSource: true,
-					Regex:        "^(.+)\\.test.com$",
+					Regex:        "^(.+)\\.test\\.com$",
 					Replacement:  "$1",
 				},
 			},
@@ -123,6 +123,24 @@ func TestHeaderMutator(t *testing.T) {
 				{
 					Header:  "Host",
 					NewName: "X-Host",
+				},
+			},
+			reqHeader: map[string][]string{
+				"host": {"example.com"},
+			},
+			expRespHeader: map[string][]string{
+				"host":   {"example.com"},
+				"X-Host": {"example.com"},
+			},
+		},
+		{
+			desc: "preserve the value if regex does not match",
+			mutations: []Mutation{
+				{
+					Header:      "Host",
+					NewName:     "X-Host",
+					Regex:       "^(.+)\\.test\\.com$",
+					Replacement: "$1",
 				},
 			},
 			reqHeader: map[string][]string{
