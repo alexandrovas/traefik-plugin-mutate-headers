@@ -7,5 +7,5 @@ testData:
   mutations:
     - header: Host
       newName: X-Implied-Host
-      regex: "^(.+)\\.testing.com$"
+      regex: "^(.+)\.testing\.com$"
       replacement: "$1"

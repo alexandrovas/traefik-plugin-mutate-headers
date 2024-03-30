@@ -17,7 +17,7 @@ Mutate Headers is a middleware plugin for [Traefik](https://traefik.io) which mu
 ```yaml
 experimental:
   plugins:
-    mutateHeaders:
+    traefik-plugin-mutate-headers:
       modulename: "github.com/trolleksii/traefik-plugin-mutate-headers"
       version: "v0.1.2"
 ```
@@ -47,6 +47,6 @@ http:
           mutations:
             - header: "Host"
               newName: "X-Host"
-              regex: "^(.+).testing.com$"
+              regex: "^(.+)\.testing\.com$"
               replacement: "$1"
 ```
