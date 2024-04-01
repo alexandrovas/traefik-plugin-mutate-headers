@@ -63,10 +63,6 @@ func New(_ context.Context, next http.Handler, config *Config, name string) (htt
 			mt.mutate = false
 		}
 
-		if m.NewName == "" {
-			mt.newName = m.Header
-		}
-
 		mutations[i] = mt
 	}
 
@@ -79,20 +75,28 @@ func New(_ context.Context, next http.Handler, config *Config, name string) (htt
 
 func (h *HeaderMutator) ServeHTTP(rw http.ResponseWriter, req *http.Request) {
 	for _, m := range h.mutations {
-		headerValues := req.Header.Values(m.oldName)
-
-		if m.deleteSource {
-			req.Header.Del(m.oldName)
+		// skip if it's not a mutation or cloning
+		if m.newName == "" && !m.mutate {
+			continue
 		}
 
+		// if the header is not present, skip
+		headerValues := req.Header.Values(m.oldName)
 		if len(headerValues) == 0 {
 			continue
 		}
 
-		newHeader := req.Header.Get(m.newName)
-		if newHeader != "" {
-			req.Header.Del(m.newName)
+		// delete/rename case
+		if m.deleteSource {
+			req.Header.Del(m.oldName)
 		}
+
+		// if new name is not set consider it as a in-place mutation
+		if m.newName == "" {
+			m.newName = m.oldName
+		}
+		// clean the old header values
+		req.Header.Del(m.newName)
 
 		for _, v := range headerValues {
 			if m.mutate {
