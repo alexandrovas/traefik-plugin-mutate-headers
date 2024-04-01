@@ -19,7 +19,7 @@ experimental:
   plugins:
     traefik-plugin-mutate-headers:
       modulename: "github.com/trolleksii/traefik-plugin-mutate-headers"
-      version: "v0.1.2"
+      version: "v0.1.3"
 ```
 
 ### Dynamic
