@@ -1,3 +1,3 @@
-module github.com/trolleksii/traefik-plugin-mutate-headers
+module github.com/alexandrovas/traefik-plugin-mutate-headers
 
 go 1.16

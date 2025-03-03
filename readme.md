@@ -18,13 +18,13 @@ Mutate Headers is a middleware plugin for [Traefik](https://traefik.io) which mu
 experimental:
   plugins:
     traefik-plugin-mutate-headers:
-      modulename: "github.com/trolleksii/traefik-plugin-mutate-headers"
+      modulename: "github.com/alexandrovas/traefik-plugin-mutate-headers"
       version: "v0.1.3"
 ```
 
 ### Dynamic
 
-To configure the Mutate Headers plugin you should create a [middleware](https://docs.traefik.io/middlewares/overview/) in your dynamic configuration as explained [here](https://docs.traefik.io/middlewares/overview/). 
+To configure the Mutate Headers plugin you should create a [middleware](https://docs.traefik.io/middlewares/overview/) in your dynamic configuration as explained [here](https://docs.traefik.io/middlewares/overview/).
 The following example creates and uses the mutateHeaders middleware plugin to set the `X-Host` header to the particular subdomain of the `Host` header.
 
 ```yaml
@@ -33,7 +33,7 @@ http:
     my-router:
       rule: "Host(`localhost`)"
       service: "my-service"
-      middlewares : 
+      middlewares :
         - "mutateHeaders"
   services:
     my-service:
@@ -47,6 +47,6 @@ http:
           mutations:
             - header: "Host"
               newName: "X-Host"
-              regex: "^(.+)\.testing\.com$"
-              replacement: "$1"
+              regex: '^(.+)\.testing\.com$'
+              replacement: '$1'
 ```

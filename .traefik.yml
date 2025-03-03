@@ -1,11 +1,11 @@
 displayName: Mutate Headers
 summary: Mutates a header using regex capture groups. Can rewrite, rename, copy to a new name with mutated value.
 type: middleware
-import: github.com/trolleksii/traefik-plugin-mutate-headers
+import: github.com/alexandrovas/traefik-plugin-mutate-headers
 
 testData:
   mutations:
     - header: Host
       newName: X-Implied-Host
-      regex: "^(.+)\\.testing\\.com$"
-      replacement: "$1"
+      regex: '^(.+)\.testing\.com$'
+      replacement: '$1'
